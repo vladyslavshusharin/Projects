@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+
+body{
+    background-color: darkblue;
+}
+
+#myText{
+    color: azure;
+}
+
+#myCont{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+</style>
+
+<body>
+    
+<div id="myCont">
+<h1 id="myText">Click to begin</h1>
+</div>
+
+
+
+<script>
+
+
+let randTime;
+let waiting = false;
+var timeHandle;
+let starTime;
+let endTime = 0;
+let clickNow = false;
+
+let cont = document.getElementById("myCont");
+let text = document.getElementById("myText");
+
+function reflex(){
+
+    startTime = Date.now();
+    document.body.style.background = "green";
+    text.innerHTML = "NOW!"
+    clickNow = true;
+
+
+}
+
+
+cont.addEventListener("click", () => {
+    if(!waiting){
+    randTime = Math.floor(Math.random() * 6000) + 2000;
+    timeHandle = setTimeout(reflex, randTime);
+    text.innerHTML = "Wait..."
+    waiting = true;
+    }
+    if(clickNow && endTime === 0){
+            endTime = Date.now() - startTime
+            document.body.style.background = "gray";
+            text.innerHTML = endTime + " ms";
+    }
+});
+
+</script>
+
+</body>
+</html>
